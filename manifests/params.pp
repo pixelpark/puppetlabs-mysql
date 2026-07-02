@@ -91,9 +91,6 @@ class mysql::params {
       $root_group              = 'root'
       $mysql_group             = 'mysql'
       $socket                  = '/var/lib/mysql/mysql.sock'
-      $ssl_ca                  = '/etc/mysql/cacert.pem'
-      $ssl_cert                = '/etc/mysql/server-cert.pem'
-      $ssl_key                 = '/etc/mysql/server-key.pem'
       $tmpdir                  = '/tmp'
       $managed_dirs            = undef
       # mysql::bindings
@@ -106,6 +103,7 @@ class mysql::params {
     'Suse': {
       case $facts['os']['name'] {
         'OpenSuSE': {
+          $provider = 'mariadb'
           $socket = '/var/run/mysql/mysql.sock'
           $log_error = '/var/log/mysql/mysqld.log'
           $pidfile = '/var/run/mysql/mysqld.pid'
@@ -117,6 +115,7 @@ class mysql::params {
           $basedir             = undef
         }
         'SLES','SLED': {
+          $provider = 'mariadb'
           $socket = '/run/mysql/mysql.sock'
           $log_error = '/var/log/mysqld.log'
           $pidfile = '/var/lib/mysql/mysqld.pid'
@@ -137,9 +136,6 @@ class mysql::params {
       $server_service_name = 'mysql'
       $xtrabackup_package_name = 'xtrabackup'
 
-      $ssl_ca              = '/etc/mysql/cacert.pem'
-      $ssl_cert            = '/etc/mysql/server-cert.pem'
-      $ssl_key             = '/etc/mysql/server-key.pem'
       $tmpdir              = '/tmp'
       $managed_dirs        = undef
       # mysql::bindings
@@ -181,9 +177,6 @@ class mysql::params {
       $root_group              = 'root'
       $mysql_group             = 'adm'
       $socket                  = '/var/run/mysqld/mysqld.sock'
-      $ssl_ca                  = '/etc/mysql/cacert.pem'
-      $ssl_cert                = '/etc/mysql/server-cert.pem'
-      $ssl_key                 = '/etc/mysql/server-key.pem'
       $tmpdir                  = '/tmp'
       $managed_dirs            = ['tmpdir','basedir','datadir','innodb_data_home_dir','innodb_log_group_home_dir','innodb_undo_directory','innodb_tmpdir']
 
@@ -227,6 +220,7 @@ class mysql::params {
     }
 
     'Archlinux': {
+      $provider                = 'mariadb'
       $daemon_dev_package_name = undef
       $client_dev_package_name = undef
       $includedir              = undef
@@ -241,9 +235,6 @@ class mysql::params {
       $mysql_group             = 'mysql'
       $server_service_name     = 'mysqld'
       $socket                  = '/var/lib/mysql/mysql.sock'
-      $ssl_ca                  = '/etc/mysql/cacert.pem'
-      $ssl_cert                = '/etc/mysql/server-cert.pem'
-      $ssl_key                 = '/etc/mysql/server-key.pem'
       $tmpdir                  = '/tmp'
       $managed_dirs            = undef
       # mysql::bindings
@@ -255,6 +246,7 @@ class mysql::params {
     }
 
     'Gentoo': {
+      $provider            = 'mysql'
       $client_package_name = 'virtual/mysql'
       $includedir          = undef
       $server_package_name = 'virtual/mysql'
@@ -267,9 +259,6 @@ class mysql::params {
       $mysql_group         = 'mysql'
       $server_service_name = 'mysql'
       $socket              = '/run/mysqld/mysqld.sock'
-      $ssl_ca              = '/etc/mysql/cacert.pem'
-      $ssl_cert            = '/etc/mysql/server-cert.pem'
-      $ssl_key             = '/etc/mysql/server-key.pem'
       $tmpdir              = '/tmp'
       $managed_dirs        = undef
       # mysql::bindings
@@ -281,6 +270,7 @@ class mysql::params {
     }
 
     'FreeBSD': {
+      $provider            = 'mysql'
       $client_package_name = 'databases/mysql57-client'
       $server_package_name = 'databases/mysql57-server'
       $basedir             = '/usr/local'
@@ -293,9 +283,6 @@ class mysql::params {
       $mysql_group         = 'mysql'
       $server_service_name = 'mysql-server'
       $socket              = '/var/db/mysql/mysql.sock'
-      $ssl_ca              = undef
-      $ssl_cert            = undef
-      $ssl_key             = undef
       $tmpdir              = '/tmp'
       $managed_dirs        = undef
       # mysql::bindings
@@ -310,6 +297,7 @@ class mysql::params {
     }
 
     'OpenBSD': {
+      $provider            = 'mariadb'
       $client_package_name = 'mariadb-client'
       $server_package_name = 'mariadb-server'
       $basedir             = '/usr/local'
@@ -322,9 +310,6 @@ class mysql::params {
       $mysql_group         = '_mysql'
       $server_service_name = 'mysqld'
       $socket              = '/var/run/mysql/mysql.sock'
-      $ssl_ca              = undef
-      $ssl_cert            = undef
-      $ssl_key             = undef
       $tmpdir              = '/tmp'
       $managed_dirs        = undef
       # mysql::bindings
@@ -341,6 +326,7 @@ class mysql::params {
     default: {
       case $facts['os']['name'] {
         'Alpine': {
+          $provider            = 'mariadb'
           $client_package_name = 'mariadb-client'
           $server_package_name = 'mariadb'
           $basedir             = '/usr'
@@ -352,9 +338,6 @@ class mysql::params {
           $mysql_group         = 'mysql'
           $server_service_name = 'mariadb'
           $socket              = '/run/mysqld/mysqld.sock'
-          $ssl_ca              = '/etc/mysql/cacert.pem'
-          $ssl_cert            = '/etc/mysql/server-cert.pem'
-          $ssl_key             = '/etc/mysql/server-key.pem'
           $tmpdir              = '/tmp'
           $managed_dirs        = undef
           $java_package_name   = undef
@@ -366,6 +349,7 @@ class mysql::params {
           $daemon_dev_package_name     = undef
         }
         'Amazon': {
+          $provider            = 'mysql'
           $client_package_name = 'mysql'
           $server_package_name = 'mysql-server'
           $basedir             = '/usr'
@@ -378,9 +362,6 @@ class mysql::params {
           $mysql_group         = 'mysql'
           $server_service_name = 'mysqld'
           $socket              = '/var/lib/mysql/mysql.sock'
-          $ssl_ca              = '/etc/mysql/cacert.pem'
-          $ssl_cert            = '/etc/mysql/server-cert.pem'
-          $ssl_key             = '/etc/mysql/server-key.pem'
           $tmpdir              = '/tmp'
           $managed_dirs        = undef
           # mysql::bindings
@@ -451,11 +432,6 @@ class mysql::params {
       'port'                  => '3306',
       'skip-external-locking' => true,
       'socket'                => $mysql::params::socket,
-      'ssl'                   => false,
-      'ssl-ca'                => $mysql::params::ssl_ca,
-      'ssl-cert'              => $mysql::params::ssl_cert,
-      'ssl-key'               => $mysql::params::ssl_key,
-      'ssl-disable'           => false,
       'thread_cache_size'     => '8',
       'thread_stack'          => '256K',
       'tmpdir'                => $mysql::params::tmpdir,
